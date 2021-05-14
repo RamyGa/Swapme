@@ -1,0 +1,117 @@
+<!DOCTYPE html >
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" >
+    <head th:fragment="head(title)">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <title th:text="${title}">(Default text here) swapme!</title>
+        <!-- Bootstrap core CSS -->
+        <link rel="stylesheet" th:href="@{/libs/bootstrap/css/bootstrap.min.css}"/>
+        <!-- Custom styles for this template -->
+        <link rel="stylesheet" th:href="@{/css/swapme.css}">
+        <!-- Google Fonts -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald|Roboto">
+        <!-- Font Awesome (for icons) -->
+        <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/all.js"></script>
+
+
+
+
+
+    </head>
+    <body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-spring fixed-top" th:fragment="navigation">
+        <div class="container">
+
+            <a  class="navbar-brand" th:href="@{/}" >
+                <img src="images/swapme_logo.png" style="width: 50px;"/>
+                Swapme!
+            </a>
+
+
+
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                    aria-controls="navbarResponsive"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <!-- if user is signed in -->
+                    <li  class="nav-item" sec:authorize="isAuthenticated()">
+                        <a  class="nav-link" th:href="@{/up_for_swap}">
+                            <i class="fa fa-sync-alt" aria-hidden="true"></i> Up for Swap</a>
+                    </li>
+                    <li class="nav-item" sec:authorize="isAuthenticated()">
+
+                        <a class="nav-link " th:href="@{/my_card_wallet}">
+                            <i class="fas fa-wallet" aria-hidden="true" > </i> <div style="float: right; padding-left: 5px" th:text="${#authentication.getPrincipal().getFirstName()+ '''s'+' Card Wallet '}" > My Card Wallet</div>  </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <form method="POST" th:action="@{/logout}" sec:authorize="isAuthenticated()">
+                            <button class="nav-link"><i class="fa fa-sign-out-alt" aria-hidden="true"></i> Sign Out</button>
+                        </form>
+                    </li>
+
+                    <!-- if user is not signed in -->
+                    <li class="nav-item" sec:authorize="!isAuthenticated()">
+                        <a class="nav-link" th:href="@{/login}">
+                            <i class="fa fa-sign-in-alt" aria-hidden="true"></i> Sign In</a>
+                    </li>
+                    <li class="nav-item" sec:authorize="!isAuthenticated()">
+                        <a class="nav-link" th:href="@{/register}">
+                            <i class="fa fa-user-plus" aria-hidden="true"></i> Register</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div style="padding-top: 6%" class="jumbotron jumbotron-fluid" th:fragment="jumbotron_main">
+        <div class="container" align="center">
+            <h3 class="display-4">Swapme!</h3>
+            <p class="lead" style="font-size: 14px" >Don't see yourself using your current gift card? You've come to the right place. Make
+                an account, upload your card, pick the card you want, and swapme will automatically swap your gift card
+                for one you really want. Sound simple?<br> That's because it is! Sign up today!</p>
+        </div>
+    </div>
+
+
+
+
+    <div style="padding-top: 7%" class="jumbotron jumbotron-fluid" th:fragment="jumbotron_choose_card">
+        <div class="container" align="center">
+            <h3 class="display-4">Choose the gift card you want</h3>
+            <p class="lead" style="font-size: 14px">Please choose the card you want and enter in the minimum balance you'd be ok with the card having.<br> (Minimum balance entered cannot exceed card Maximum amount)
+
+            </p>
+
+        </div>
+    </div>
+
+
+
+    <div style="padding-top: 7%" class="jumbotron jumbotron-fluid" th:fragment="jumbotron(title, description)">
+        <div class="container" align="center">
+            <h3 class="display-4" th:text="${title}" >Add a Gift Card</h3>
+            <p class="lead" style="font-size: 14px"  th:text="${description}">Please enter in your gift card information <br>
+            </p>
+
+        </div>
+    </div>
+
+
+
+    <div class="container" th:fragment="content">
+        <p> main content goes here</p>
+    </div>
+
+
+    </body>
+</html>

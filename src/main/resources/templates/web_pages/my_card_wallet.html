@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<head>
+
+
+
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title> swapme! Card wallet</title>
+
+
+
+
+
+    <link rel="stylesheet" th:href="@{/libs/bootstrap/css/bootstrap.min.css}"/>
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" th:href="@{/css/swapme.css}">
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald|Roboto">
+    <!-- Font Awesome (for icons) -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/all.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jsbarcode/3.6.0/JsBarcode.all.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+
+
+    <style>
+        #version {
+            font-size: 9px;
+            color: Black;
+            text-align: left;
+            padding-right: 85px;
+            display:inline-block;
+            padding-left: 10px;
+            padding-top: 5px
+        }
+
+        /* The Modal (background) */
+        .modal2 {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            padding-top: 100px; /* Location of the box */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0, 0, 0,0.8); /* Black w/ opacity */
+
+        }
+
+        /* Modal Content */
+        .modal2-content {
+            background-color: #ffffff;
+            margin-right: auto;
+            margin-left: auto;
+            margin-bottom: 35px;
+            margin-top: 30px;
+            padding-top: 35px;
+            padding-bottom: 15px;
+
+            width: 50%;
+            border-radius: 15px;
+
+
+            text-align: center;
+
+        }
+
+        .close2 {
+
+            padding-left: 85%;
+            margin-top: 20px;
+            font-size: 2.5rem;
+            line-height: 1;
+            color: #000;
+            text-shadow: 0 1px 0 #fff;
+            opacity: .5;
+        }
+
+        .close2:hover, .close2:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+            opacity: .75;
+        }
+
+
+
+        .container2 ul li {
+            text-align: center;
+            width: 100px;
+            /*height:70px;*/
+            float: left;
+            list-style-type: none;
+            display: inline-block;
+
+        }
+
+
+
+    </style>
+
+</head>
+    <body style=" padding-bottom: 40%;">
+
+
+
+
+    <nav th:replace="~{layouts/main_layout :: nav}"></nav>
+    <div th:replace="~{layouts/main_layout :: jumbotron(title = 'Card Wallet', description = 'These are your cards that have already been swapped. These gift cards below can be sent to your \'UP FOR SWAP\' section or can remain here.')}"></div>
+
+
+
+
+
+
+
+
+
+
+    <div  class="container">
+
+
+
+
+
+
+
+
+
+
+        <ul>
+
+            <li  style="margin-left:1.2rem; margin-bottom:2rem; margin-top:1.5rem; padding-bottom: 20px" th:each="cardWalletEntities : ${cardWalletEntities}" >
+
+
+
+
+
+                                                                   <!--th:action="@{/my_card_wallet/(id=${cardWalletEntities.id})} "                                       -->
+                <form   id="myForm" class="form-horizontal" role="form" method="POST"  th:action="@{/my_card_wallet}"    >
+
+                    <input id="paramid" type="hidden" th:name="id"/>
+
+            <!----------------pop up ------------------------->
+
+                    <!-- The Modal -->
+
+                    <div style="display: none" id="myModal" class="modal2" >
+
+                        <!-- Modal content -->
+                        <div style="padding-right: 1px; padding-left: 1px" class="modal2-content">
+                            <span class="close2">&times;</span>
+                            <h2  style="padding-bottom:15px;text-align: center; font-weight: bold; color: #494a49">Are you sure you want to delete this card?<br></h2>
+
+                            <img style="margin-bottom: 30px" id="imgInpopup" width="220px" height="136px" src=" " />
+                            <div></div>
+
+                            <div style="padding-right: 25px">  <span style=" font-size: 25px; margin-right: 70px" onclick="cancelButton()" id="cancel" class="btn btn-secondary"><i></i>Cancel</span>  <button style=" font-size: 25px;  " name="insidePopupId" id="insidePopupId"  onclick="delete_button_inside_popup(this)"  class="btn btn-danger"><i></i>Delete</button>
+
+                            </div>
+                            <footer style="text-align: center; font-weight: bold; font-size: 10px; padding-top: 10px; padding-right: 21px" > *Will be permanently removed from your card wallet<i> </i></footer>
+
+                        </div> <!--pop up-->
+
+                    </div><!--pop up-->
+                </form>
+
+                    <!----------------pop up ------------------------->
+
+
+                    <div class="flip-card-wallet" >
+                    <div class="flip-card-inner-wallet">
+
+                        <div class="flip-card-front-wallet">
+
+
+                                <img width="320px" height="200px" th:src="@{'/images/'+${cardWalletEntities.name +'.png'}}" />
+
+
+
+
+                        </div> <!-- class="flip-card-front" -->
+
+
+
+                                <img th:name="${cardWalletEntities.name}" th:id="${cardWalletEntities.id}" onclick="delete_button_opens_popup(this)"  class="flip-card-back-wallet-delete-button" src="images/delete-button.png" style=" padding-bottom: 5px; display: block; margin-left: auto; margin-right:auto; width: 50%; position: relative;  "/>
+
+
+
+
+                        <div  class="flip-card-back-wallet" >
+
+                            <p  style="text-align: center; margin:0px;padding-top:10px; padding-bottom:15px; font-size: 20px;" th:text="${cardWalletEntities.name}">title</p>
+                            <p  style="text-align: start; margin:0px; padding-left:10px; font-size: 15px;" th:utext="' &lt;strong&gt;Balance:&lt;/strong&gt; $'+${cardWalletEntities.cardBalance} ">balance</p>
+                            <p  style="text-align: start; margin:0px; padding-left:10px; font-size: 15px;" th:utext="'&lt;strong&gt;Card #:&lt;/strong&gt; '+${cardWalletEntities.cardNumber}">card number</p>
+                            <p  style="text-align: start; margin:0px; padding-left:10px; font-size: 15px;" th:utext="'&lt;strong&gt;Card Pin:&lt;/strong&gt; '+${cardWalletEntities.pin}">card pin</p>
+                            <p  style="text-align: start; margin:0px; padding-left:10px; font-size: 15px;" th:utext="'&lt;strong&gt;Card Exp Date:&lt;/strong&gt; '+${cardWalletEntities.date}">card exp date</p>
+                            <img style="position: absolute;right: 0px;bottom: 0px; padding-right: 20px; padding-bottom: 20px" id='barcode' th:src="@{https://api.qrserver.com/v1/create-qr-code/(data=${cardWalletEntities.cardNumber},size='140x140')}"  width="60" height="60" />
+                            <span id="version" >*If this card expires and its the end of the month,<br>you still have all of next month to use the gift card before it expires.</span>
+
+
+
+                        </div><!-- class="flip-card-back" -->
+
+                    </div><!-- class="flip-card-inner" -->
+
+                </div><!-- class="flip-card" -->
+
+
+
+            </li>
+
+        </ul>
+
+
+
+
+        <span th:if="${response == 'NoData'}">
+            <img  class="center2" src="images/cardWalletNoCardsHere.png" style="width: 98%; padding-top: 12px"/>
+        </span>
+
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+    <script>
+
+        let span = document.getElementsByClassName("close2")[0];
+        // Get the modal
+        let modal = document.getElementById("myModal");
+        let cancel = document.getElementById("cancel");
+        let popup = document.getElementById("popup");
+       // let delete_button_in_popup = document.getElementById("delete");
+
+
+
+
+        // When the user clicks the button, open the modal
+        function delete_button_opens_popup(element) {
+            modal.style.display = "block"
+
+            document.getElementById('paramid').value= element.id;
+            // document.getElementById('paramname').value= element.name;
+            // src="@{'/images/'+${name +'.png'}}"
+            document.getElementById('imgInpopup').src="/swapme/images/"+element.name +'.png'
+
+
+
+
+
+        }
+        function cancelButton() {
+            modal.style.display = "none";
+
+        }
+
+        function delete_button_inside_popup() {
+             modal.style.display = "none";
+
+             document.getElementById("myForm").submit();
+        }
+
+
+
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+            modal.style.display = "none";
+            // document.getElementById("myForm").submit();
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target === modal) {
+                modal.style.display = "none";
+            }
+
+
+        }
+
+
+
+        let card = document.querySelectorAll('.flip-card-wallet .flip-card-inner-wallet');
+
+
+
+        card.forEach(function(card) {
+            card.addEventListener( 'click', function() {
+                card.classList.toggle('flip');
+
+
+
+            });
+        });
+
+
+    </script>
+
+
+    </body>
+
+
+
+</html>

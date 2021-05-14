@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="~{layouts/main_layout :: head(title = 'Swapme! Register')}">
+    </head>
+    <body style=" padding-bottom: 85px;" >
+    <nav th:replace="~{layouts/main_layout :: nav}"></nav>
+    <div th:replace="~{layouts/main_layout :: jumbotron_main}"></div>
+
+ <div class="container">
+    <div class="row" th:if="${success}">
+        <div class="col-md-3"></div>
+        <div class="col-md-6 alert alert-success" role="alert" style="text-align: center;margin-bottom: 0;padding-bottom: 0;">
+            <div style="padding-right: 0;padding-bottom: 0;margin-bottom: 0;">
+            Registration successful!
+            </div>
+
+            <p style="padding-left: 0;margin-left: 0;text-align: center;">Please log in! <a href="login"> Login here</a> </p>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+
+     <div class="row" th:if="${failed}">
+         <div class="col-md-3"></div>
+         <div class="col-md-6 alert alert-danger" role="alert" >
+             Email address already exists in our records! Try another email or try signing in?
+         </div>
+         <div class="col-md-3"></div>
+     </div>
+
+    <!-- User Registration form -->
+    <form class="form-horizontal" role="form" method="POST" th:action="@{/register}" th:object="${user}" th:if="!${success}">
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <h2>Registration</h2>
+                <hr>
+            </div>
+        </div>
+        <div class="row" th:if="${validationErrors}">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+            <span class="text-danger align-middle">
+                <ul th:each="error : ${validationErrors}">
+                    <li th:text="${error.getDefaultMessage()}"></li>
+                </ul>
+            </span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 field-label-responsive">
+                <label for="first-name">First Name</label>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-user"></i></div>
+                        <input type="text"
+                               name="first-name"
+                               class="form-control"
+                               id="first-name"
+                               placeholder="First Name"
+                               th:field="*{firstName}" required autofocus>
+<!--                               required autofocus>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 field-label-responsive">
+                <label for="last-name">Last Name</label>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-user"></i></div>
+                        <input type="text"
+                               name="last-name"
+                               class="form-control"
+                               id="last-name"
+                               placeholder="Last Name"
+                               th:field="*{lastName}" required autofocus>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3 field-label-responsive">
+                <label for="email">E-Mail Address</label>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-at"></i></div>
+                        <input type="email"
+                               name="email"
+                               class="form-control"
+                               id="email"
+                               placeholder="you@example.com"
+                               th:field="*{email}" required autofocus >
+<!--                               required autofocus>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 field-label-responsive">
+                <label for="password">Password</label>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group has-danger">
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <div class="input-group-addon" style="width: 2.6rem"><i class="fas fa-key"></i></div>
+                        <input type="password"
+                               name="password"
+                               class="form-control"
+                               id="password"
+                               placeholder="Password"
+                               oninput="check(this)"
+                               th:field="*{password}" required autofocus>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 field-label-responsive">
+                <label for="password">Confirm Password</label>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <div class="input-group-addon" style="width: 2.6rem">
+                            <i class="fas fa-key"></i>
+                        </div>
+                        <input type="password"
+                               name="confirmPassword"
+                               class="form-control"
+                               id="confirmPassword"
+                               placeholder="Confirm Password"
+                               oninput="check(this)"
+                               th:field="*{confirmPassword}" required autofocus>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <button type="submit" class="btn btn-success"><i class="fa fa-user-plus"></i> Register</button>
+                <p style="padding-top:1rem">Already have an account? <a th:href="@{login}"> Login here</a> </p>
+            </div>
+        </div>
+
+    </form>
+ </div>
+
+
+    <script type='text/javascript'>
+        function check() {
+            if (document.getElementById('confirmPassword').value !== document.getElementById('password').value) {
+                document.getElementById('confirmPassword').setCustomValidity('Passwords do not match.');
+
+            }
+            else if(document.getElementById('password').value !== document.getElementById('confirmPassword').value){
+                document.getElementById('password').setCustomValidity('passwords do not match.');
+            }
+            else {
+                // input valid -> reset error message
+                document.getElementById('confirmPassword').setCustomValidity('');
+                document.getElementById('password').setCustomValidity('');
+            }
+        }
+    </script>
+
+    </body>
+</html>

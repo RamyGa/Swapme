@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head >
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <title> Swapme! Choose a card you want</title>
+
+        <link rel="stylesheet" th:href="@{/libs/bootstrap/css/bootstrap.min.css}"/>
+        <!-- Custom styles for this template -->
+        <link rel="stylesheet" th:href="@{/css/swapme.css}">
+        <!-- Google Fonts -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald|Roboto">
+        <!-- Font Awesome (for icons) -->
+        <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/all.js"></script>
+
+
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+
+
+        <style>
+            /*body {font-family: Arial, Helvetica, sans-serif;}*/
+
+            /* The Modal (background) */
+            .modal2 {
+                display: none; /* Hidden by default */
+                position: fixed; /* Stay in place */
+                z-index: 1; /* Sit on top */
+                padding-top: 100px; /* Location of the box */
+                left: 0;
+                top: 0;
+                width: 100%; /* Full width */
+                height: 100%; /* Full height */
+                overflow: auto; /* Enable scroll if needed */
+                background-color: rgb(0,0,0); /* Fallback color */
+                background-color: rgba(0, 0, 0,0.8); /* Black w/ opacity */
+
+            }
+
+            /* Modal Content */
+            .modal2-content {
+                background-color: #ffffff;
+                margin-right: auto;
+                margin-left: auto;
+                margin-bottom: 35px;
+                margin-top: 30px;
+                padding-top: 35px;
+                padding-bottom: 15px;
+
+                width: 50%;
+                border-radius: 15px;
+
+
+                text-align: center;
+
+            }
+
+            .close2 {
+
+                padding-left: 85%;
+                margin-top: 20px;
+                font-size: 2.5rem;
+                line-height: 1;
+                color: #000;
+                text-shadow: 0 1px 0 #fff;
+                opacity: .5;
+            }
+
+            .close2:hover, .close2:focus {
+                color: #000;
+                text-decoration: none;
+                cursor: pointer;
+                opacity: .75;
+            }
+
+        </style>
+
+
+    </head>
+    <nav th:replace="~{layouts/main_layout :: nav}"></nav>
+    <div th:replace="~{layouts/main_layout :: jumbotron_choose_card}"></div>
+    <body style=" padding-bottom: 200px;">
+
+
+
+
+    <div class="row" th:if="${success}">
+        <div class="col-md-3"></div>
+        <div class="col-md-6 alert alert-success" role="alert" >
+            Card Added Successfully!
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+
+
+    <div th:if="!${success}" class="container" > <!--adding th:if="!${success}" will cause everything in this div to disappear-->
+        <!-- Modal content -->
+
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
+
+
+        <ul>
+            <div class="imgContainer">
+                <p style="text-align: center; ">Starbucks</p>
+                <span>
+                    <img class="hovering"  onclick="document.getElementById('card_name').innerHTML = 'Starbucks'; document.getElementById('card_name_input').value = 'Starbucks';" id="starbucks" src="images/Starbucks.png" width="115px"/>
+                </span>
+            </div>
+
+
+            <div class="imgContainer">
+                <p style="text-align: center">Olive garden</p>
+                <span >
+                    <img id="olive_garden" onclick="document.getElementById('card_name').innerHTML = 'Olive garden';document.getElementById('card_name_input').value = 'Olive garden';" class="hovering" src="images/Olive garden.png" width="115px"/>
+                </span>
+            </div>
+
+            <div class="imgContainer">
+                <p style="text-align: center">Wal-mart</p>
+                <span>
+                    <img id="walmart" onclick="document.getElementById('card_name').innerHTML = 'Wal-mart'; document.getElementById('card_name_input').value = 'Wal-mart';" class="hovering" src="images/Wal-mart.png" width="115px"/>
+                </span>
+            </div>
+
+            <div class="imgContainer">
+                <p style="text-align: center">Amazon</p>
+                <span>
+                    <img id="amazon" onclick="document.getElementById('card_name').innerHTML = 'Amazon'; document.getElementById('card_name_input').value = 'Amazon';" class="hovering" src="images/Amazon.png" width="115px"/>
+                </span>
+            </div>
+
+            <div class="imgContainer">
+                <p style="text-align: center">Best Buy</p>
+                <span>
+                    <img id="best_buy" onclick="document.getElementById('card_name').innerHTML = 'Best Buy'; document.getElementById('card_name_input').value = 'Best Buy';" class="hovering" src="images/Best Buy.png" width="115px"/>
+                </span>
+            </div>
+
+            <div class="imgContainer">
+                <p style="text-align: center">Chilis</p>
+                <span>
+                    <img id="chilis" onclick="document.getElementById('card_name').innerHTML = 'Chilis'; document.getElementById('card_name_input').value = 'Chilis';" class="hovering" src="images/Chilis.png" width="115px"/>
+                </span>
+            </div>
+
+            <div class="imgContainer">
+                <p style="text-align: center">Subway</p>
+                <span>
+                    <img id="subway" onclick="document.getElementById('card_name').innerHTML = 'Subway'; document.getElementById('card_name_input').value = 'Subway';" class="hovering" src="images/Subway.png" width="115px"/>
+                </span>
+            </div>
+
+            <div class="imgContainer">
+                <p style="text-align: center; padding-top: 1rem;">Target</p>
+                <span>
+                    <img id="target"onclick="document.getElementById('card_name').innerHTML = 'Target'; document.getElementById('card_name_input').value = 'Target';" class="hovering" src="images/Target.png" width="115px"/>
+                </span>
+            </div>
+
+            <div class="imgContainer">
+                <p style="text-align: center; padding-top: 1rem;">Home Depot</p>
+                <span>
+                    <img id="home_depot" onclick="document.getElementById('card_name').innerHTML = 'Home Depot'; document.getElementById('card_name_input').value = 'Home Depot';" class="hovering" src="images/Home Depot.png" width="115px"/>
+                </span>
+            </div>
+
+            <div class="imgContainer">
+                <p style="text-align: center; padding-top: 1rem;">Walgreens</p>
+                <span>
+                    <img id="walgreens" onclick="document.getElementById('card_name').innerHTML = 'Walgreens'; document.getElementById('card_name_input').value = 'Walgreens';" class="hovering" src="images/Walgreens.png" width="115px"/>
+                </span>
+            </div>
+
+            <div class="imgContainer">
+                <p style="text-align: center; padding-top: 1rem;">Macys</p>
+                <span>
+                    <img id="macys" onclick="document.getElementById('card_name').innerHTML = 'Macys'; document.getElementById('card_name_input').value = 'Macys';" class="hovering" src="images/Macys.png" width="115px"/>
+                </span>
+            </div>
+
+            <div class="imgContainer">
+                <p style="text-align: center; padding-top: 1rem;">Lowes</p>
+                <span>
+                    <img id="lowes" onclick="document.getElementById('card_name').innerHTML = 'Lowes'; document.getElementById('card_name_input').value = 'Lowes';" class="hovering" src="images/Lowes.png" width="115px"/>
+                </span>
+            </div>
+
+            <div class="imgContainer">
+                <p style="text-align: center; padding-top: 1rem;">Kohls</p>
+                <span>
+                    <img id="kohls" onclick="document.getElementById('card_name').innerHTML = 'Kohls'; document.getElementById('card_name_input').value = 'Kohls';" class="hovering" src="images/Kohls.png" width="115px"/>
+                </span>
+            </div>
+
+            <div class="imgContainer">
+                <p style="text-align: center; padding-top: 1rem;">Bed bath beyond</p>
+                <span>
+                    <img  id="bed_bath_beyond" onclick="document.getElementById('card_name').innerHTML = 'Bed bath beyond'; document.getElementById('card_name_input').value = 'Bed bath beyond';" class="hovering" src="images/Bed bath beyond.png" width="115px"/>
+                </span>
+            </div>
+
+            <div class="imgContainer">
+                <p style="text-align: center; padding-top: 1rem;">Apple bees</p>
+                <span>
+                    <img id="apple_bees" onclick="document.getElementById('card_name').innerHTML = 'Apple bees'; document.getElementById('card_name_input').value = 'Apple bees';" class="hovering" src="images/Apple bees.png" width="115px"/>
+                </span>
+            </div>
+
+            <div class="imgContainer">
+                <p style="text-align: center; padding-top: 1rem;">Costco</p>
+                <span>
+                    <img id="costco" onclick="document.getElementById('card_name').innerHTML = 'Costco'; document.getElementById('card_name_input').value = 'Costco';" class="hovering" src="images/Costco.png" width="115px"/>
+                </span>
+            </div>
+        </ul>
+
+
+    </div>
+
+    <div class="container">
+
+
+        <form style="padding-top: 23rem;" class="form-horizontal" role="form" method="POST" th:action="@{/choose_card}" th:object="${item}" th:if="!${success}">
+
+            <div style="display: none; z-index: 999" id="deleteCardPopup" class="modal2" >
+
+                <!-- Modal content -->
+                <div style="padding-right: 1px; padding-left: 1px" class="modal2-content">
+                    <div class="close2">&times;</div>
+                    <h2  style="padding-bottom:15px;text-align: center; font-weight: bold; color: #494a49">Please select a card from the options!<br></h2>
+
+                    <img style="margin-bottom: 30px" id="imgInpopup" width="520px"  src="images/dontForgetToChooseACard.png" />
+                    <div></div>
+
+                    <div > <div style=" width: 115px; font-size: 25px;" id="ok" class="btn btn-outline-primary"><i></i>OK</div>
+
+                    </div>
+
+                </div> <!--pop up-->
+
+            </div><!--pop up-->
+
+            <!--Gift card info label starts here ------------------------------------------------------------------------------------->
+            <div class="container2">
+                <div class="row">
+
+                    <div class="col-md-3"></div>
+
+                    <div style="margin-right: 5rem;" class="col-md-6">
+
+                        <h2 >Gift card info</h2>
+                        <hr>
+                    </div>
+                </div>
+
+                <div class="row" th:if="${validationErrors}">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-6">
+            <span class="text-danger align-middle">
+                <ul th:each="error : ${validationErrors}">
+                    <li th:text="${error.getDefaultMessage()}"></li>
+                </ul>
+            </span>
+                    </div>
+                </div>
+
+
+                <!---------------------Card name / chosen card -------------------------------------------------------------------------->
+                <div class="row">
+                    <div class="col-md-3 field-label-responsive">
+                        <label for="card_name">Card name</label>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                <div class="input-group-addon" style="width: 2.6rem"><i class="fas fa-credit-card"></i>
+                                </div>
+                                <label   id="card_name" for="card_name" >Please choose a card</label>
+
+                                <input
+                                        style="display: none"
+                                        name="card_name_input"
+                                        id="card_name_input"
+                                        th:field="*{name}" required >
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!---------------------Card name / chosen card end-------------------------------------------------------------------------->
+
+
+                <!---------------------Card Balance--------------------------------------------------------------------------------------------->
+                <div class="row">
+
+
+                    <!--------------------Card balance label-------------------------------------------->
+                    <div class="col-md-3 field-label-responsive">
+                        <label for="card-balance">Min card balance</label>
+                    </div>
+
+                    <!--------------------Card balance field-------------------------------------------->
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                <div  class="input-group-addon" style="width: 2.6rem; padding-top: 9px"><i class="fas fa-dollar-sign"></i>
+                                </div>
+                                <input
+                                        style='width:4em; margin-right: 150px;'
+                                        type="number"
+                                        th:min="5" step="any"
+                                        th:max="${add_card}"
+                                        name="card-balance"
+                                        class="form-control"
+                                        id="card-balance"
+                                        th:field="*{cardBalance}"
+                                        onkeypress="return event.charCode >= 48 && event.charCode <= 57" title="only whole numbers"
+                                        placeholder="Cant exceed max amount" >
+
+
+
+                                <div style="padding-left: 45px" class="field-label-responsive" >
+                                    <label style="font-size: 14px">Min amount cannot exceed Max amount of: </label> <label th:utext="'$'+${add_card}"></label>
+                                </div>
+                                <label style="font-size: 12px; padding-left: 45px; ">* Here you will choose the minimum amount you would be ok the wanted card's balance to contain. Note: Minimum balance cannot exceed Max balance. </label>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!---------------------Card Balance end--------------------------------------------------------------------------------------------->
+
+
+
+
+                <div style="float: right; padding-left: 140px;" class="col-md-6">
+                    <button id="submitButton" style=" font-size: 22px;" type="submit" class="btn btn-success"><i
+                            class="fas fa-chevron-right"></i>
+                        Finish
+                    </button>
+                </div>
+
+
+<!--            -->
+
+
+            </div>
+
+     </form>
+
+
+    </div>
+    <script type="text/javascript">
+
+        $('body').on('click', 'span', function () {
+            $('span.active2').removeClass('active2');
+            $(this).addClass('active2');
+        });
+
+
+        let span2 = document.getElementsByClassName("close2")[0];
+        // Get the modal
+        let deleteCardPopup = document.getElementById("deleteCardPopup");
+
+        // Get the modal
+
+        let ok = document.getElementById("ok");
+
+        // let delete_button_in_popup = document.getElementById("delete");
+
+        ok.onclick = function (){
+            deleteCardPopup.style.display = "none";
+        }
+        span2.onclick = function() {
+            deleteCardPopup.style.display = "none";
+        }
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target === deleteCardPopup) {
+                deleteCardPopup.style.display = "none";
+            }
+        }
+        let submitButton = document.getElementById("submitButton");
+        let card_name = document.getElementById("card_name");
+        submitButton.onclick = function (){
+
+                if(card_name.innerHTML === "Please choose a card"){
+                    deleteCardPopup.style.display  = "block";
+                }
+            }
+
+            </script>
+    </body>
+</html>

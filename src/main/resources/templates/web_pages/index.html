@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="~{layouts/main_layout :: head(title = 'Swapme! Home')}">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+
+    <script type="text/javascript">
+
+        setTimeout(function() {
+            $('#overlay').modal('hide');
+        }, 5000);
+
+        $(document).ready(function(){
+            $('#overlay').modal('show');
+
+        });
+
+    </script>
+
+    <style>
+        .footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            background-color: red;
+            color: white;
+            text-align: center;
+        }
+    </style>
+
+</head>
+<body>
+
+<nav th:replace="~{layouts/main_layout :: nav}"></nav>
+<div th:replace="~{layouts/main_layout :: jumbotron_main}"></div>
+
+
+
+<img src="images/hand_left_walmart.png" style="width: 37%; float: left;"/>
+<img src="images/hand_right_starbucks.png" style="width: 37%; float: right;"/>
+
+<div style="text-align: center;" class="container">
+
+
+
+    <div class="modal fade" id="overlay">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Modal title</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Context here</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div sec:authorize="isAnonymous()">
+        <div style="margin-top: 6%;padding-left:10rem; text-align: center;" class="imgContainer" >
+            <p style=" float:left;">Already signed up? <a class="btn btn-success" role="button" th:href="@{login}"> Login
+                here!</a></p>
+            <p style="float:left; padding-left:2rem;">Don't have an account? <a class="btn btn-success" role="button" th:href="@{register}"> Register here!</a>
+            </p>
+
+        </div>
+    </div>
+    <div style="position: fixed;left: 0;bottom: 0;width: 100%;background-color: #09304a;">
+        <p style="color: #ffffff8f;text-align: center; padding-top: 12px; font-size: 13px;margin-bottom: 7px">Copyright © Ramy Gatie. All rights reserved.</p>
+    </div>
+
+
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
+
+</body>
+</html>
